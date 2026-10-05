@@ -1,7 +1,7 @@
 /* Customizations
     1. Centered on Santa Fe,NM instead of the lecture location
-    2.
-    3.
+    2. Added navigation controls and drawing tools
+    3. Added a title with blue background
     */
 /santa fe with lots of controls/ 
 <!DOCTYPE html>
@@ -10,12 +10,33 @@
     <title>Hernandez Map 2: Santa Fe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^6.10.0/dist/maplibre-gl.css" />
+     <script src="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-terradraw@1.0.1/dist/maplibre-gl-terradraw.umd.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-terradraw@1.0.1/dist/maplibre-gl-terradraw.css"
+    />
     <style>
         body { margin: 0; }
+         #title {
+            position:fixed;
+            margin-top: 0;
+            top: 10px;
+            right: 55px;
+            font-size: 2em;
+            letter-spacing: .04em;
+            padding: 10px 15px;
+            background-color: rgba(49, 184, 218, 0.5);
+            border: 1px solid grey;
+            border-radius: 3px;
+            z-index: 800;
+            text-align: center;
+        }
         #map { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+        
     </style>
 </head>
 <body>
+    <h1 id="title">Map of Santa Fe</h1>
     <div id="map"></div>
     <script type="module">
         import * as maplibregl from 'https://unpkg.com/maplibre-gl@^6.10.0/dist/maplibre-gl.mjs';
@@ -26,6 +47,26 @@
             center: [-105.9372, 35.6869],   // [lng, lat]
             zoom: 12
         });
+        map.on('load', function () {
+    map.addControl(new maplibregl.NavigationControl(), 'top-left');
+    map.addControl(new maplibregl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: true
+    }), 'top-left');
+    map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+    map.addControl(new maplibregl.ScaleControl(), 'bottom-left');
+});
+const draw = new MaplibreTerradrawControl.MaplibreTerradrawControl({
+        modes: [
+            // 'render', comment this to always show drawing tool
+            'point',
+            'linestring',
+            'polygon',
+            'rectangle'
+        ],
+        open: true,
+    });
+    map.addControl(draw, 'top-left');
         window.map = map;
     </script>
 </body>
