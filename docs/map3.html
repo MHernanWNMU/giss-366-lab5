@@ -1,13 +1,13 @@
 /* Customizations
-    1. Centered on ... ,NM instead of the lecture location
-    2.
-    3.
+    1. Centered on Ruidoso, NM instead of the lecture location
+    2. Added points for populated places
+    3. Added a marker for Ruidoso Highschool
     */
 /description and changes/ 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Map 3</title>
+    <title>Hernandez Map 3: Ruidoso</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^6.10.0/dist/maplibre-gl.css" />
     <style>
@@ -22,10 +22,52 @@
 
         const map = new maplibregl.Map({
             container: 'map',
-            style: 'https://tiles.openfreemap.org/styles/positron',
-            center: [-100, 40],   // [lng, lat]
-            zoom: 3
+            style: 'https://tiles.openfreemap.org/styles/bright',
+            center: [-105.6675, 33.3444],   // [lng, lat]
+            zoom: 12
         });
+        const marker = new maplibregl.Marker()
+            .setLngLat([-105.64702, 33.34816])
+            .addTo(map);
+        map.on('load', function () {
+            map.addSource('cities',{
+                type: 'geojson',
+                data:'data/nm_populated_places.geojson'
+            });
+            map.addLayer({
+            id: 'cities-points',
+            type: 'circle',
+            source: 'cities',
+            paint: {
+                'circle-radius': 3,
+                'circle-color': '#6b53e8'
+            }
+            });
+        });
+        map.on('load', function () {
+        });map.addSource('counties',{
+                type: 'geojson',
+                data:'data/nm_counties.geojson'
+            });
+            map.addLayer({
+            id: 'counties-boundaries',
+            type: 'fill',
+            source: 'counties',
+            paint: {
+                'fill-color': '#130750',
+                'fill-opacity': 0.7
+            }
+        });
+            map.addLayer({
+                id: 'Lincoln-county',
+                type: 'line',
+                source: 'counties',
+                paint: {
+                    'line-color': '#130750',
+                    'line-width': 5
+                }
+            });
+
         window.map = map;
     </script>
 </body>
