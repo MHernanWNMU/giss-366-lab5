@@ -23,8 +23,83 @@
         const map = new maplibregl.Map({
             container: 'map',
             style: 'https://tiles.openfreemap.org/styles/positron',
-            center: [-100, 40],   // [lng, lat]
-            zoom: 3
+            center: [-105.2239, 35.5939],   // [lng, lat]
+            zoom: 13
+        
+        });
+        map.addSource('schools',{
+            type:'geojson',
+            data:{
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        type: 'Feature',
+                        properties: {
+                            name: 'New Horizons',
+                            rating: 1
+                        },
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [-105.21972, 35.5934]
+                        }
+                    },
+                    {
+                        type: 'Feature',
+                        properties: {
+                            name: 'Early Childhood Center',
+                            rating: 2
+                            },
+                         geometry: {
+                            type: 'Point',
+                            coordinates: [-105.22122, 35.59788]
+                         }
+                     },
+                     {
+                        type: 'Feature',
+                        properties: {
+                            name: 'Legion Park Elementary School',
+                            rating: 3
+                            },
+                         geometry: {
+                            type: 'Point',
+                            coordinates: [-105.22982, 35.61674]
+                         }
+                     },
+                     {
+                        type: 'Feature',
+                        properties: {
+                            name: 'Memorial Middle School',
+                            rating: 4
+                            },
+                         geometry: {
+                            type: 'Point',
+                            coordinates: [-105.23437, 35.61558]
+                         }
+                     },
+                     {
+                        type: 'Feature',
+                        properties: {
+                            name: 'RobertsonHigh School',
+                            rating: 5
+                            },
+                         geometry: {
+                            type: 'Point',
+                            coordinates: [-105.21886, 35.60299]
+                         }
+                     }
+                ]
+            }
+        });
+        map.addLayer({
+            id: 'schools',
+            type: 'circle',
+            source: 'schools',
+            paint: {
+                'circle-radius': 8,
+                'circle-color': '#4c34dc',
+                'circle-stroke-color': '#a28ff7',
+                'circle-stroke-width': 2
+            }
         });
         window.map = map;
     </script>
