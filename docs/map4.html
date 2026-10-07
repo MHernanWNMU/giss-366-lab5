@@ -1,13 +1,12 @@
 /* Customizations
     1. Centered on Las Vegas,NM instead of the lecture location
     2. Created feature collection for schools I have attended in Las Vegas
-    3.
-    */
-/ schools ive attended in Las Vegas,and numeric attributes for each school/ 
+    3. Configured cursor styles for interactivity
+    *// schools ive attended in Las Vegas,and numeric attributes for each school// 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Map 4</title>
+    <title> Hernandez Map 4: Las Vegas Schools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^6.10.0/dist/maplibre-gl.css" />
     <style>
@@ -27,7 +26,8 @@
             zoom: 13
         
         });
-        map.addSource('schools',{
+// from this section on is not showing on the map
+        map.addSource('places',{
             type:'geojson',
             data:{
                 type: 'FeatureCollection',
@@ -40,7 +40,7 @@
                         },
                         geometry: {
                             type: 'Point',
-                            coordinates: [-105.21972, 35.5934]
+                            coordinates: [-105.2197, 35.5934]
                         }
                     },
                     {
@@ -51,7 +51,7 @@
                             },
                          geometry: {
                             type: 'Point',
-                            coordinates: [-105.22122, 35.59788]
+                            coordinates: [-105.2212, 35.5978]
                          }
                      },
                      {
@@ -62,7 +62,7 @@
                             },
                          geometry: {
                             type: 'Point',
-                            coordinates: [-105.22982, 35.61674]
+                            coordinates: [-105.2298, 35.6167]
                          }
                      },
                      {
@@ -73,33 +73,48 @@
                             },
                          geometry: {
                             type: 'Point',
-                            coordinates: [-105.23437, 35.61558]
+                            coordinates: [-105.2343, 35.6155]
                          }
                      },
                      {
                         type: 'Feature',
                         properties: {
-                            name: 'RobertsonHigh School',
+                            name: 'Robertson High School',
                             year: 2017-21
                             },
                          geometry: {
                             type: 'Point',
-                            coordinates: [-105.21886, 35.60299]
+                            coordinates: [-105.2188, 35.6029]
                          }
                      }
                 ]
             }
         });
         map.addLayer({
-            id: 'schools',
+            id: 'places',
             type: 'circle',
-            source: 'schools',
+            source: 'places',
             paint: {
                 'circle-radius': 8,
                 'circle-color': '#4c34dc',
                 'circle-stroke-color': '#a28ff7',
                 'circle-stroke-width': 2
             }
+        });
+        map.on('click', 'places',(e) =>{ 
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const name = e.features[0].properties.name;
+            (Math.abs(e.lngLat.lng - coordinates[0]) > 180); {coordinates[0] += e.lngLat.lng > coordinates[0] ? 360:-360;}
+            new maplibregl.Popup()
+                .setLngLat(coordinates)
+                .setHTML('<strong>${name}</strong>')
+                .addTo(map);
+        })    
+        map.on('mouseenter','places',()=>{
+            map.getCanvas().style.cursor='pointer';
+        });
+        map.on('mouseleave','places',()=>{
+            map.getCanvas().style.cursor='';
         });
         window.map = map;
     </script>
