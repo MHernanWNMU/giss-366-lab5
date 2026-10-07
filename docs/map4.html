@@ -1,6 +1,6 @@
 /* Customizations
     1. Centered on Las Vegas,NM instead of the lecture location
-    2.
+    2. Created feature collection for schools I have attended in Las Vegas
     3.
     */
 / schools ive attended in Las Vegas,and numeric attributes for each school/ 
@@ -30,13 +30,13 @@
         map.addSource('schools',{
             type:'geojson',
             data:{
-                'type': 'FeatureCollection',
-                'features': [
+                type: 'FeatureCollection',
+                features: [
                     {
                         type: 'Feature',
                         properties: {
                             name: 'New Horizons',
-                            rating: 1
+                            year: 2006-8
                         },
                         geometry: {
                             type: 'Point',
@@ -47,7 +47,7 @@
                         type: 'Feature',
                         properties: {
                             name: 'Early Childhood Center',
-                            rating: 2
+                            year: 2008-9
                             },
                          geometry: {
                             type: 'Point',
@@ -58,7 +58,7 @@
                         type: 'Feature',
                         properties: {
                             name: 'Legion Park Elementary School',
-                            rating: 3
+                            year: 2009-14
                             },
                          geometry: {
                             type: 'Point',
@@ -69,7 +69,7 @@
                         type: 'Feature',
                         properties: {
                             name: 'Memorial Middle School',
-                            rating: 4
+                            year: 2014-17
                             },
                          geometry: {
                             type: 'Point',
@@ -80,7 +80,7 @@
                         type: 'Feature',
                         properties: {
                             name: 'RobertsonHigh School',
-                            rating: 5
+                            year: 2017-21
                             },
                          geometry: {
                             type: 'Point',
