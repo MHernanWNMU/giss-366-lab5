@@ -3,7 +3,7 @@ A collection of 5 Web Maps made with Map Libre across the state of New Mexico
 
 ## Web Map Gallery
 
-Gallery Link: [insert your github pages link]
+Gallery Link: https://mhernanwnmu.github.io/giss-366-lab5/ 
 
 ---
 
