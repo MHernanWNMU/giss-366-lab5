@@ -1,13 +1,13 @@
 /* Customizations
-    1. Centered on ... ,NM instead of the lecture location
-    2.
-    3.
+    1. Centered on Albuquerque, NM instead of the lecture location
+    2. Added 3D fill extrusion layer
+    3. Added navigation control with pitch visualized
     */
 /description and changes/ 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Map 5</title>
+    <title>Hernandez Map 5:/Albuquerque with buildings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^6.10.0/dist/maplibre-gl.css" />
     <style>
@@ -29,6 +29,11 @@
             bearing: 30,
             canvasContextAttributes: {antialias: true}
         });
+        // beyond this point the map is not showing any of the 3d data or the navigation control
+        map.on('load',function(){
+            map.addControl(new maplibregl.NavigatonControl({visualizePitch: true})), 'top-left'});
+
+        
         map.on('load', () => {
             const layers = map.getStyle().layers;
             let labelLayerId;
