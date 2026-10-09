@@ -1,5 +1,5 @@
 # GISS 366 Lab 05
-[update your description here] 
+A collection of 5 Web Maps made with Map Libre across the state of New Mexico
 
 ## Web Map Gallery
 
